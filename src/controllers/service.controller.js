@@ -1,4 +1,3 @@
-
 const service = require('../services/service.service');
 
 // GET /services
@@ -6,6 +5,9 @@ async function getAll(req, res, next) {
 	try {
 		const { q, category } = req.query;
 		const results = await service.listApprovedServices({ q, category });
+		if (!results || results.length === 0) {
+			return res.status(404).json({ message: 'No services found' });
+		}
 		res.json(results);
 	} catch (err) {
 		next(err);
@@ -17,6 +19,9 @@ async function getAllUnfiltered(req, res, next) {
 	try {
 		const { q, category } = req.query;
 		const results = await service.listAllServices({ q, category });
+		if (!results || results.length === 0) {
+			return res.status(404).json({ message: 'No services found' });
+		}
 		res.json(results);
 	} catch (err) {
 		next(err);
