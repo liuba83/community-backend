@@ -1,4 +1,4 @@
-const repo = require('../repositories/service.repository');
+const repo = require('../db/service.repository');
 
 async function listApprovedServices({ q, category }) {
 	const all = await repo.getAllServices();
