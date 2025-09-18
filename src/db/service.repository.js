@@ -23,7 +23,6 @@ async function addService(service) {
 		const created = await base(AIRTABLE_TABLE).create({
 			...service,
 			approved: false,
-			// submittedAt: new Date().toISOString(),
 		});
 		return { id: created.id, ...created.fields };
 	}
@@ -36,6 +35,18 @@ async function approveService(id) {
 	}
 	const service = services.find(s => s.id === id);
 	if (service) service.approved = true;
+	return service;
+}
+
+async function denyService(id) {
+	if (process.env.AIRTABLE_API_KEY && process.env.AIRTABLE_BASE_ID) {
+		const updated = await base(AIRTABLE_TABLE).update(id, { approved: false});
+		return { id: updated.id, ...updated.fields };
+	}
+	const service = services.find(s => s.id === id);
+	if (service) {
+		service.approved = false;
+	}
 	return service;
 }
 
@@ -55,5 +66,6 @@ module.exports = {
 	getServiceById,
 	addService,
 	approveService,
+	denyService,
 	deleteService,
 };
