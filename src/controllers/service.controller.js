@@ -12,6 +12,17 @@ async function getAll(req, res, next) {
 	}
 }
 
+// GET /services/all
+async function getAllUnfiltered(req, res, next) {
+	try {
+		const { q, category } = req.query;
+		const results = await service.listAllServices({ q, category });
+		res.json(results);
+	} catch (err) {
+		next(err);
+	}
+}
+
 // GET /services/:id
 async function getById(req, res, next) {
 	try {
@@ -60,6 +71,7 @@ async function remove(req, res, next) {
 
 module.exports = {
 	getAll,
+	getAllUnfiltered,
 	getById,
 	create,
 	approve,
