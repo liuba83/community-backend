@@ -1,35 +1,5 @@
 const base = require('../config/airtable');
-const AIRTABLE_TABLE = process.env.AIRTABLE_TABLE || 'database';
-
-let services = [
-	{
-		id: 1,
-		title: 'Bright Cleaners',
-		description: 'Home and office cleaning service.',
-		category: 'Home Services',
-		hashtags: ['#cleaning', '#eco'],
-		address: '123 Main St',
-		phone: '123-456-7890',
-		email: 'info@brightcleaners.com',
-		website: 'https://brightcleaners.com',
-		approved: true,
-		submittedAt: new Date(),
-	},
-	{
-		id: 2,
-		title: 'Math Tutoring by John',
-		description: 'Experienced tutor offering online math lessons.',
-		category: 'Education',
-		hashtags: ['#math', '#tutoring'],
-		address: '',
-		phone: '',
-		email: 'john.tutor@gmail.com',
-		website: '',
-		approved: false,
-		submittedAt: new Date(),
-	},
-];
-
+const AIRTABLE_TABLE = process.env.AIRTABLE_TABLE;
 
 async function getAllServices() {
 	if (process.env.AIRTABLE_API_KEY && process.env.AIRTABLE_BASE_ID) {
@@ -40,7 +10,6 @@ async function getAllServices() {
 	return services;
 }
 
-
 async function getServiceById(id) {
 	if (process.env.AIRTABLE_API_KEY && process.env.AIRTABLE_BASE_ID) {
 		const record = await base(AIRTABLE_TABLE).find(id);
@@ -49,26 +18,16 @@ async function getServiceById(id) {
 	return services.find(s => s.id === id);
 }
 
-
 async function addService(service) {
 	if (process.env.AIRTABLE_API_KEY && process.env.AIRTABLE_BASE_ID) {
 		const created = await base(AIRTABLE_TABLE).create({
 			...service,
 			approved: false,
-			submittedAt: new Date().toISOString(),
+			// submittedAt: new Date().toISOString(),
 		});
 		return { id: created.id, ...created.fields };
 	}
-	const newService = {
-		...service,
-		id: services.length ? services[services.length - 1].id + 1 : 1,
-		approved: false,
-		submittedAt: new Date(),
-	};
-	services.push(newService);
-	return newService;
 }
-
 
 async function approveService(id) {
 	if (process.env.AIRTABLE_API_KEY && process.env.AIRTABLE_BASE_ID) {
@@ -79,7 +38,6 @@ async function approveService(id) {
 	if (service) service.approved = true;
 	return service;
 }
-
 
 async function deleteService(id) {
 	if (process.env.AIRTABLE_API_KEY && process.env.AIRTABLE_BASE_ID) {
