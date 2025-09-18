@@ -57,6 +57,18 @@ async function approve(req, res, next) {
 	}
 }
 
+// PUT /services/:id/deny
+async function deny(req, res, next) {
+	try {
+		const id = req.params.id;
+		const svc = await service.denyService(id);
+		if (!svc) return res.status(404).json({ message: 'Service not found' });
+		res.json({ message: 'Service denied', service: svc });
+	} catch (err) {
+		next(err);
+	}
+}
+
 // DELETE /services/:id
 async function remove(req, res, next) {
 	try {
@@ -75,5 +87,6 @@ module.exports = {
 	getById,
 	create,
 	approve,
+	deny,
 	remove,
 };

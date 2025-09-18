@@ -8,6 +8,7 @@ router.get('/all', controller.getAllUnfiltered);
 router.get('/:id', controller.getById);
 router.post('/', controller.create);
 router.put('/:id/approve', controller.approve);
+router.put('/:id/deny', controller.deny);
 router.delete('/:id', controller.remove);
 
 module.exports = router;

@@ -39,6 +39,19 @@ async function approveService(id) {
 	return service;
 }
 
+async function denyService(id) {
+	if (process.env.AIRTABLE_API_KEY && process.env.AIRTABLE_BASE_ID) {
+		const updated = await base(AIRTABLE_TABLE).update(id, { approved: false});
+		return { id: updated.id, ...updated.fields };
+	}
+	const service = services.find(s => s.id === id);
+	if (service) {
+		service.approved = false;
+		// service.denied = true;
+	}
+	return service;
+}
+
 async function deleteService(id) {
 	if (process.env.AIRTABLE_API_KEY && process.env.AIRTABLE_BASE_ID) {
 		const deleted = await base(AIRTABLE_TABLE).destroy(id);
@@ -55,5 +68,6 @@ module.exports = {
 	getServiceById,
 	addService,
 	approveService,
+	denyService,
 	deleteService,
 };

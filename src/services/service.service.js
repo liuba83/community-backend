@@ -40,11 +40,16 @@ async function removeService(id) {
 	return await repo.deleteService(id);
 }
 
+async function denyService(id) {
+	return await repo.denyService(id);
+}
+
 module.exports = {
 	listApprovedServices,
 	listAllServices,
 	getService,
 	createService,
 	approveService,
+	denyService,
 	removeService,
 };
