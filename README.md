@@ -33,3 +33,17 @@ npm install
 
 # Start the server
 npm run dev
+
+---
+
+## 🔑 Environment Variables
+
+Create a `.env` file in the project root and add the following:
+
+```env
+AIRTABLE_API_KEY=your_airtable_api_key
+AIRTABLE_BASE_ID=your_airtable_base_id
+AIRTABLE_TABLE=your_table_name
+```
+
+These are required for Airtable integration. You can find your API key and base ID in your Airtable account and API docs.
