@@ -23,7 +23,7 @@ A web-based community platform that allows individuals and small businesses to a
 
 ## 📂 Setup & Run
 
-```bash
+````bash
 # Clone the repo
 git clone https://github.com/liuba83/community-backend.git
 cd community-backend
@@ -44,6 +44,6 @@ Create a `.env` file in the project root and add the following:
 AIRTABLE_API_KEY=your_airtable_api_key
 AIRTABLE_BASE_ID=your_airtable_base_id
 AIRTABLE_TABLE=your_table_name
-```
+````
 
 These are required for Airtable integration. You can find your API key and base ID in your Airtable account and API docs.
