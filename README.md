@@ -1,50 +1,69 @@
 # 🧹 Community Services API
 
-A web-based community platform that allows individuals and small businesses to advertise their services and allows users to search and discover these services by category or name. This is a simple Node.js + Express app that allows users to submit and retrieve local service listings. Admins can approve or delete submitted services.
+A simple Node.js + Express backend that lets users submit and discover local services. Admins can approve or delete submissions. Data is stored in Airtable.
 
 ---
 
 ## 🚀 Features
 
-- Submit a new service (not approved by default)
-- View all **approved** services
+- Submit a new service (pending approval by default)
+- View all approved services
 - Search services by title or category
-- Approve or delete services (admin simulation)
+- Approve or delete services (admin)
 - RESTful JSON API
 
 ---
 
 ## 📦 Requirements
 
-- [Node.js](https://nodejs.org/) (v14+ recommended)
-- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+- [Node.js](https://nodejs.org/) v14+
+- npm
 
 ---
 
-## 📂 Setup & Run
+## 📂 Setup
 
-````bash
-# Clone the repo
+```bash
 git clone https://github.com/liuba83/community-backend.git
 cd community-backend
-
-# Install dependencies
 npm install
+```
 
-# Start the server
+Create a `.env` file:
+
+```env
+AIRTABLE_API_KEY=your_api_key
+AIRTABLE_BASE_ID=your_base_id
+AIRTABLE_ENDPOINT_URL=https://api.airtable.com
+AIRTABLE_TABLE=services
+PORT=3000
+```
+
+Start the server:
+
+```bash
 npm run dev
+```
 
 ---
 
-## 🔑 Environment Variables
+## 📡 API Endpoints
 
-Create a `.env` file in the project root and add the following:
+| Method | Endpoint                    | Description               |
+| ------ | --------------------------- | ------------------------- |
+| GET    | `/api/services`             | Get all approved services |
+| GET    | `/api/services/:id`         | Get service by ID         |
+| POST   | `/api/services`             | Create a new service      |
+| PATCH  | `/api/services/:id/approve` | Approve a service         |
+| PATCH  | `/api/services/:id/deny`    | Deny a service            |
+| DELETE | `/api/services/:id`         | Delete a service          |
 
-AIRTABLE_API_KEY=API_KEY
-AIRTABLE_BASE_ID=BASE_ID
-AIRTABLE_ENDPOINT_URL=ENDPOINT_URL
-AIRTABLE_TABLE=TABLE_NAME
-PORT=PORT
-````
+---
 
-These are required for Airtable integration. You can find your API key and base ID in your Airtable account and API docs.
+## 🛠 Scripts
+
+| Command          | Description             |
+| ---------------- | ----------------------- |
+| `npm run dev`    | Start with hot reload   |
+| `npm start`      | Start production server |
+| `npm run format` | Lint and format code    |
