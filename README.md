@@ -40,7 +40,6 @@ npm run dev
 
 Create a `.env` file in the project root and add the following:
 
-```text
 AIRTABLE_API_KEY=API_KEY
 AIRTABLE_BASE_ID=BASE_ID
 AIRTABLE_ENDPOINT_URL=ENDPOINT_URL
